@@ -144,6 +144,16 @@
             justify-content: center;
             font-size: 4rem;
             color: var(--text-secondary);
+            object-fit:contain;
+            overflow: hidden; 
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            border-radius: 50%; 
+            display: block;
         }
         
         .cta-buttons {
@@ -326,7 +336,6 @@
         <div class="container">
             <div class="nav-container">
                 <div class="logo">Ragavan B</div>
-                <!-- <div class="profile-image"><img src="image.jpeg"></div> -->
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
@@ -345,6 +354,7 @@
             <div class="hero-content">
 
                 <div class="profile-image">
+                    <img src="image.jpeg">
                 </div>  
 
                 <h1>RAGAVAN B</h1>
