@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ragavan | E-Portfolio</title>
+    <meta name="description" content="Computer Science student specializing in system design, cybersecurity, blockchain, and privacy-preserving technologies.">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: hsl(220, 25%, 6%);
+            --bg-secondary: hsl(220, 25%, 8%);
+            --bg-card: hsl(220, 25%, 10%);
+            --text-primary: hsl(180, 100%, 85%);
+            --text-secondary: hsl(180, 20%, 65%);
+            --accent-primary: hsl(171, 100%, 55%);
+            --accent-secondary: hsl(280, 100%, 70%);
+            --border-color: hsl(220, 25%, 15%);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(220, 25%, 6%, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: var(--accent-primary);
+            font-size: 1.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-primary);
+        }
+        
+        /* Card Styles */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.3s ease;
+        }
+        
+        .card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+        
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-content .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-primary);
+            margin: 2rem auto;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--text-secondary);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+        
+        .btn-secondary {
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            background: transparent;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-primary);
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .skill-tag {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-tag {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Contact */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .contact-item {
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .contact-item h3 {
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--accent-primary);
+            border-radius: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 8px;
+        }
+        
+        .scroll-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            animation: scroll 2s infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(20px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">Ragavan B</div>
+                <!-- <div class="profile-image"><img src="image.jpeg"></div> -->
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+
+                <div class="profile-image">
+                </div>  
+
+                <h1>RAGAVAN B</h1>
+                <p class="subtitle">&gt; System Design | Low-level Systems | Cybersecurity | Blockchain</p>
+                
+                <p>Passionate about system design, computer architecture, and privacy-preserving technologies. Specializing in Cryptographic protocols, Reverse Engineering, and Binary Exploitation.</p>
+                
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="card">
+                <h3>Personal Statement</h3>
+                <p>As a Computer Science student with a deep passion for low-level systems and cybersecurity, I thrive on understanding the intricate details of how systems work at their core. My expertise spans from reverse engineering and binary exploitation to cutting-edge privacy-preserving technologies using Zero-Knowledge Proofs.</p>
+                
+                <p>I believe in building secure, efficient, and scalable systems that can withstand the challenges of modern computing. My work in authentication systems represents my commitment to advancing privacy and security in the digital age.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="card skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Javascript</span>
+                        <span class="skill-tag">Common Lisp</span>
+                    </div>
+                </div>
+                <div class="card skill-category">
+                    <h3>Cybersecurity</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Reverse Engineering</span>
+                        <span class="skill-tag">Binary Exploitation</span>
+                        <span class="skill-tag">Malware Analysis</span>
+                        <span class="skill-tag">Network Security</span>
+                    </div>
+                </div>
+                
+                <div class="card skill-category">
+                    <h3>Blockchain & Privacy</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Solidity</span>
+                        <span class="skill-tag">Foundary</span>
+                        <span class="skill-tag">Smart Contracts</span>
+                        <span class="skill-tag">Zero-Knowledge Proofs</span>
+                        <span class="skill-tag">Foundary</span>
+                    </div>
+                </div>
+                
+                <div class="card skill-category">
+                    <h3>Systems & Backend</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Database Design</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">API Development</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="card project-card">
+                    <h3>CargoLink</h3>
+                    <p>Full-stack logistics management system built with modern web technologies. Features real-time tracking, inventory management, and comprehensive dashboard analytics.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                </div>
+                
+                <div class="card project-card">
+                    <h3>Web3SSH</h3>
+                    <p>Decentralized application (DApp) connecting book authors and readers on the Ethereum blockchain. Features NFT-based book ownership and decentralized publishing.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Ethereum</span>
+                        <span class="tech-tag">Solidity</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Web3.js</span>
+                    </div>
+                </div>
+                
+                <div class="card project-card">
+                    <h3>Metaheuristic</h3>
+                    <p>Python library implementing various metaheuristic optimization algorithms including Genetic Algorithm, Particle Swarm Optimization, and their variants.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">NumPy</span>
+                        <span class="tech-tag">Algorithm Design</span>
+                        <span class="tech-tag">Optimization</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="card">
+                <h3>Bachelor of Technology in Computer Science Engineering</h3>
+                <p><strong>Indian Institute of Information Technology, Sri City</strong> | Graduation: 2027</p>
+                <p>Relevant Coursework: Computer Architecture, System Design, Cryptography, Network Security, Algorithm Design, Data Structures</p>
+                <p>CGPA: 9.1</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section">
+        <div class="container">
+            <h2 class="section-title">Achievements & Recognition</h2>
+            <div class="card">
+                
+                <h3 style="margin-top: 2rem;">Technical Competitions</h3>
+                <ul style="margin-top: 1rem; margin-left: 2rem;">
+                    <li>Pentathon Finalist - 2025</li>
+                    <li>Web3SSH Hackathon Participant - 2025</li>
+                    <li>Global Game Jam Participant - 2024</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-info">
+                <div class="card contact-item">
+                    <h3> Email</h3>
+                    <a href="mailto:ragavanbala10@gmail.com">ragavanbala10@gmail.com</a>
+                    </div>
+                <div class="card contact-item">
+                    <h3>LinkedIn</h3>
+                    <a href="www.linkedin.com/in/ragavan-balachandhar">linkedin.com/in/ragavan-balachandhar</a>
+                </div>
+                <div class="card contact-item">
+                    <h3>GitHub</h3>
+                    <a href="www.github.com/ragavan-10">github.com/ragavan-10</a>
+                </div>
+                <div class="card contact-item">
+                    <h3>Resume</h3>
+                    <a href="resume.pdf">Download CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add stagger effect to cards in the same section
+        document.querySelectorAll('.section').forEach(section => {
+            const cards = section.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.transitionDelay = `${index * 0.1}s`;
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(15, 23, 42, 0.95)';
+            } else {
+                nav.style.background = 'rgba(15, 23, 42, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
